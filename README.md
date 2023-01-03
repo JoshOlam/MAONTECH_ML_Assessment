@@ -3,7 +3,7 @@
 © Joshua Olalemi
 
 ---
-### Project Overview: ML Prediction assessment
+## Project Overview: ML Prediction assessment
 
 Further to the discussion I had with Mr Paul Oluyege of MaonTech, I was asked to build and train a machine-learning prediction system on the sales dataset provided. I am to use the data for the last 3 months' average monthly sales (AMS) number to predict the next month's average monthly sales number.
 
@@ -25,8 +25,27 @@ The further instructions given are:
 - `year` - Operation year. i.e 2022.
 
 ### Project Methodology
+
 From the problem statement, I deduced the below frame work for workflow:
+
+#### PostgreSQL Database:
+
+As required by this project, I created a Postgre relational databse on AWS and connected to it from.
+
 #### Explore the Data:
+
+I explored the data to gain some exciting insights and also to aid in the project life cycle.
+
 #### Feature Engineering:
+
+Based on the insights I gleaned during the previous phase, I proceeded to engineer some features. I created some, and dropped some too.
+
 #### Modelling:
+
+I iterated through six (6) models and selected the best performing of them; `RandomForestRegressor`.
+
 #### Deployment:
+
+Finally, I deployed the python script using two endpoints;
+- flask api as a manual triger to retrain the model,
+- streamlit to get predicted value of sales for next month's future sales.
