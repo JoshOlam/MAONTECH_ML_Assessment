@@ -77,10 +77,9 @@ def _model(df):
                                                         random_state=42,
                                                         shuffle=False
                                                         )
-    rfr = RandomForestRegressor()
+    rfr = RandomForestRegressor(random_state=42)
     print("Fitting model...")
     rfr.fit(X_train, y_train)
-    
     
     print("Running prediction")
     result = []
