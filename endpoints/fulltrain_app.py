@@ -1,21 +1,43 @@
 # API Dependencies
 import json
+import sys
+sys.path.append('../') #to add the directory containing the config script
+import maon_config as config
 
 import numpy as np
 import pandas as pd
 import psycopg2
-from flask import Flask, jsonify, request
+from flask import Flask
 from sklearn.ensemble._forest import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 
+def connect():
+    
+    # Set up a connection to the postgres server.
+    print("Setting up the postgres server...")
+    conn_string = "host="+ config.PGHOST  +" dbname="+ config.PGDATABASE +" user=" + config.PGUSER \
+                  +" password="+ config.PGPASSWORD
+    #print(conn_string)
+    print("\t...completed\nConnecting to the server...")
+    conn = psycopg2.connect(conn_string)
+    print("\t...Server Connected!")
+    print("Importing data...")
+    cursor = conn.cursor()
+    
+    # Create a cursor object
+    cursor.execute("SELECT * FROM maontech_dataset")
+    data = cursor.fetchall()
+    print("\t...data imported!")
+    return data
+
+data = connect()
 columns = ["region", "depot", "item_no", "tms", "ams", "month", "year"]
-conn = psycopg2.connect("host=maontech-db.cuslngvsj13a.eu-west-1.rds.amazonaws.com dbname=maontech_db user=postgres password=LbELB4tyVt7F2DrYk9nS")
-cursor = conn.cursor()
-cursor.execute("SELECT * FROM maontech_dataset")
-data = cursor.fetchall()
 df = pd.DataFrame(data, columns=columns)
-#df = pd.read_csv("data-1671661749260.csv")
+del columns
+
+
+app = Flask(__name__)
 
 def data_preprocessing(df):
     """Private helper function to preprocess data for model prediction.
@@ -62,9 +84,10 @@ def _model(df):
     
     
     # Pickle model for use within our API
+    """
     save_path = 'assets/trained-models/randomforestmodel.pkl'
     print (f"Training completed. Saving model to: {save_path}")
-    pickle.dump(rfr, open(save_path,'wb'))
+    pickle.dump(rfr, open(save_path,'wb'))"""
 
     print("Running prediction")
     result = []
@@ -73,26 +96,17 @@ def _model(df):
     rmse = round(np.sqrt(MSE), 2)
     result.append('RandomForestRegression RMSE: SW')
     result.append(rmse)
-    accuracy_ = round((r2_score(y_test, y_pred) *100), 2)
+    accuracy_ = round(r2_score(y_test, y_pred) , 2)
     #print(f"Accuracy: {accuracy_}%")
-    result.append(f"Accuracy: {accuracy_}%")
-    print(result)
-
-
-
-app = Flask(__name__)
-@app.route('/predict', methods=['GET'])
-def index():
-    return "Making Predictions..."
-def predictions():
-    prediction=_model(df)
-    return jsonify(prediction)#=_model(df))
+    result.append(f"Accuracy: {accuracy_}")
     
+    return result
 
-#@app.route('/', methods=['GET'])
-#def index():
-#    return 'Machine Learning Inference'
+predictions = _model(df)
 
+@app.route('/full-training')
+def prediction():
+   return predictions
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+   app.run(debug=True)
