@@ -72,7 +72,7 @@ source setup/env_setup_windows.sh
 ```bash
 source setup/env_setup_unix.sh
 ```
-To run the flask app as a manual trigger to retrain the model, use
+5. To run the flask app as a manual trigger to retrain the model, use
 ```bash
 python endpoints/fulltrain_app.py
 ```
