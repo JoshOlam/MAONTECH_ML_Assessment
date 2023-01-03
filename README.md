@@ -62,7 +62,8 @@ git clone https://github.com/JoshOlam/MAONTECH_ML_Assessment.git
 ```bash
 cd MAONTECH_ML_Assessment
 ```
-4. Run the script located in `setup/env_setup.sh` using
+4. Run the script located in `setup/env_setup.sh` using:
+
 *for windows*:
 ```bash
 source setup/env_setup_windows.sh
