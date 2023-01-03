@@ -13,7 +13,7 @@ python3 -m venv maon_venv
 maon_venv/Scripts/activate.bat
 
 ## Install the requirement packages in the working environment
-pip install setup/requirements.txt
+pip install -r setup/requirements.txt
 
 ## Create a jupyter kernel
 python -m ipykernel install --user --name=maonKernel
