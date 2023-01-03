@@ -7,7 +7,7 @@
 #cd MAONTECH_ML_Assessment
 
 ## Create a virtual environment in the current directory
-python3 -m venv maon_venv
+python -m venv maon_venv
 
 ## Activate the environment (windows)
 maon_venv/Scripts/activate.bat
