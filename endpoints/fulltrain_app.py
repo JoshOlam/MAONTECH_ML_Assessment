@@ -1,5 +1,4 @@
 # API Dependencies
-import json
 import sys
 sys.path.append('../') #to add the directory containing the config script
 import maon_config as config
@@ -83,12 +82,6 @@ def _model(df):
     rfr.fit(X_train, y_train)
     
     
-    # Pickle model for use within our API
-    """
-    save_path = 'assets/trained-models/randomforestmodel.pkl'
-    print (f"Training completed. Saving model to: {save_path}")
-    pickle.dump(rfr, open(save_path,'wb'))"""
-
     print("Running prediction")
     result = []
     y_pred = rfr.predict(X_test) #.score(X_train, y_train)
