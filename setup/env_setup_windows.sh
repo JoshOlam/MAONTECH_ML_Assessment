@@ -10,7 +10,7 @@
 python -m venv maon_venv
 
 ## Activate the environment (windows)
-maon_venv/Scripts/activate.bat
+source maon_venv/Scripts/activate.bat
 
 ## Install the requirement packages in the working environment
 pip install -r setup/requirements.txt
