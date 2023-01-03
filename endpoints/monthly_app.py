@@ -207,7 +207,7 @@ def main():
 
 		st.subheader("Sales Prediction")
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
-			st.write(df.head()) # will write the df to the page
+			st.write(df) # will write the df to the page
 
 	# Building out the predication page
 	if selection == "Prediction":
