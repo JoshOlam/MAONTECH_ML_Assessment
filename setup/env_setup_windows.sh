@@ -9,8 +9,8 @@ cd MAONTECH_ML_Assessment
 ## Create a virtual environment in the current directory
 python3 -m venv maon_venv
 
-## Activate the environment (Linux or MacOS)
-source maon_venv/bin/activate
+## Activate the environment (windows)
+maon_venv/Scripts/activate.bat
 
 ## Install the requirement packages in the working environment
 pip install setup/requirements.txt
