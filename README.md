@@ -78,9 +78,8 @@ python endpoints/fulltrain_app.py
 ```
 If it runs successfully, you should see something similar to:
 
-<insert flask server response>
 When you copy and paste the link returned in a browser or postman, you should see something similar to;
-<insert >
+
 6. To run the streamlit app to run pedictions based on your preferred parameters,
 ```bash
 streamlit run endpoints/monthly_app.py
